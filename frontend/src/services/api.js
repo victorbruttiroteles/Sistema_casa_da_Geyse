@@ -1,10 +1,17 @@
 import axios from 'axios';
 import { useAuthStore } from '../store/authStore';
+import { createMockAdapter } from './mockApi';
+
+const USE_MOCK = !import.meta.env.VITE_API_URL;
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || '/api',
   timeout: 15000,
 });
+
+if (USE_MOCK) {
+  createMockAdapter(api);
+}
 
 api.interceptors.request.use((config) => {
   const token = useAuthStore.getState().token;
@@ -15,7 +22,7 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (res) => res,
   (err) => {
-    if (err.response?.status === 401) {
+    if (err?.status === 401 || err?.response?.status === 401) {
       useAuthStore.getState().logout();
       window.location.href = '/login';
     }
