@@ -9,7 +9,7 @@
     "dev:backend": "npm run dev --workspace=backend",
     "dev:frontend": "npm run dev --workspace=frontend",
     "dev:bot": "npm run dev --workspace=bot",
-    "build": "npm run build --workspace=backend && npm run build --workspace=frontend",
+    "build": "cd frontend && npm install && npm run build",
     "install:all": "npm install && npm install --workspace=backend && npm install --workspace=frontend && npm install --workspace=bot"
   },
   "devDependencies": {
