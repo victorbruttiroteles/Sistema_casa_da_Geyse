@@ -4,8 +4,9 @@
   "description": "Backend API - Sistema de Reservas Casa da Geyse",
   "main": "src/server.js",
   "scripts": {
-    "dev": "nodemon src/server.js",
-    "start": "node src/server.js",
+    "dev": "nodemon src/mock/mockServer.js",
+    "start": "node src/mock/mockServer.js",
+    "start:prod": "node src/server.js",
     "migrate": "node src/config/migrate.js",
     "seed": "node src/config/seed.js"
   },
