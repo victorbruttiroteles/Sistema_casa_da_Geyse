@@ -56,7 +56,8 @@ function parseToken(t) { try { return JSON.parse(atob(t)); } catch { return null
 async function mockRequest(method, url, data, params) {
   await wait();
   const M = method.toUpperCase();
-  const p = url.split('?')[0];
+  const raw = url.split('?')[0];
+  const p = raw.startsWith('/api') ? raw : '/api' + raw;
 
   // Auth
   if (M === 'POST' && p === '/api/auth/login') {
